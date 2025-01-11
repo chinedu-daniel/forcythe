@@ -9,10 +9,12 @@ const SecondBodySection: React.FC = () => {
   const [currentIndexLeft, setCurrentIndexLeft] = useState(0);
 
   const images = [
-    '/images/image1.jpg',
-    '/images/image2.jpg',
-    '/images/image3.jpg',
-    '/images/image4.jpg',
+    '/images/image1.jpeg',
+    '/images/image2.jpeg',
+    '/images/image3.jpeg',
+    '/images/image4.jpeg',
+    '/images/image5.jpeg',
+    '/images/image6.jpeg',
   ];
 
   // Slider functionality
@@ -50,7 +52,7 @@ const SecondBodySection: React.FC = () => {
 
           {/* Image Container */}
           <div className="flex flex-shrink-0 w-2/3 overflow-hidden relative">
-            <Image
+            <Image height={80} width={100}
               src={images[currentIndexRight]}
               alt="Image Slider Right"
               className="w-full transition-transform duration-500 ease-in-out transform"
@@ -78,7 +80,7 @@ const SecondBodySection: React.FC = () => {
 
           {/* Image Container */}
           <div className="flex flex-shrink-0 w-2/3 overflow-hidden relative">
-            <Image
+            <Image height={80} width={100}
               src={images[currentIndexLeft]}
               alt="Image Slider Left"
               className="w-full transition-transform duration-500 ease-in-out transform"

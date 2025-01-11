@@ -5,7 +5,7 @@ const BodySection: React.FC = () => (
       <div className="container mx-auto px-6 bg-white p-8 border rounded-lg shadow-lg">
         {/* Write-up content */}
         <div className="mb-6">
-          <h2 className="text-2xl font-bold mb-2">We build products that shape a better future</h2>
+          <h2 className="text-2xl font-bold mb-2">We build <span className="text-blue">products</span> that shape a better future</h2>
           <p className="text-lg text-gray-700">We’re the architects of digital excellence across industries. We redefine business with cutting-edge digital strategies that invokes sector-wide transformation.</p>
         </div>
   
