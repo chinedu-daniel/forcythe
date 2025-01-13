@@ -33,36 +33,33 @@ const FirstBodySection: React.FC = () => {
 
   return (
     <section
-      className="py-12 bg-cover"
-      style={{ backgroundImage: "url('/images/header-background.svg')" }}
-    >
-      <div className="container mx-auto px-6 bg-transparent border p-8 rounded-lg shadow-lg">
-        {/* Write-up content */}
-        <div className="mb-6">
-          <h2 className="text-7xl font-bold text-white mb-2">
-            {text.split('products').map((part, index, array) => (
-              <React.Fragment key={index}>
-                {part}
-                {index === array.length - 1 ? '' : <span className="text-blue">products</span>}
-              </React.Fragment>
-            ))}
-          </h2>
-          <p className="text-lg text-white">
-            {paragraph.split('.').map((sentence, index) => (
-              <React.Fragment key={index}>
-                {sentence.trim()}
-                {index < paragraph.split('.').length - 1 ? <br /> : ''}
-              </React.Fragment>
-            ))}
-          </p>
-        </div>
-
-        {/* Book a Demo button */}
-        <button className="px-6 py-2 bg-white text-black border rounded hover:bg-blue-500 hover:text-white">
-          Book a Call
-        </button>
-      </div>
-    </section>
+  className="py-12 bg-cover"
+  style={{ backgroundImage: "url('/images/header-background.svg')" }}
+>
+  <div className="container mx-auto px-6 bg-transparent border p-8 rounded-lg shadow-lg">
+    <div className="mb-6">
+      <h2 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white mb-2">
+        {text.split('products').map((part, index, array) => (
+          <React.Fragment key={index}>
+            {part}
+            {index === array.length - 1 ? '' : <span className="text-blue">products</span>}
+          </React.Fragment>
+        ))}
+      </h2>
+      <p className="text-sm md:text-lg text-white">
+        {paragraph.split('.').map((sentence, index) => (
+          <React.Fragment key={index}>
+            {sentence.trim()}
+            {index < paragraph.split('.').length - 1 ? <br /> : ''}
+          </React.Fragment>
+        ))}
+      </p>
+    </div>
+    <button className="px-4 py-2 md:px-6 md:py-3 bg-white text-black border rounded hover:bg-blue-500 hover:text-white">
+      Book a Call
+    </button>
+  </div>
+</section>
   );
 };
 

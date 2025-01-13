@@ -5,9 +5,7 @@ import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn, FaYoutube, FaReddit 
 const Footer: React.FC = () => {
   return (
     <footer className="text-white py-12">
-      <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
-        
-        {/* Form Section (Email and Subscribe) */}
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="p-6 rounded-lg">
           <form className="flex flex-col space-y-4">
             <div className="flex flex-col items-center">
@@ -28,16 +26,10 @@ const Footer: React.FC = () => {
           </form>
         </div>
 
-        {/* Company Information with Logo */}
-        <div>
-          <div className="flex flex-col items-center mb-6">
-            <Image src="/images/forcythelogo.svg" width={100} height={100} alt="Company Logo" className="mt-4" /> {/* Replace with your logo path */}
-            <p className="text-sm mt-2 text-center">
-              Your company description here. It can be a short write-up about what your company does and its core values.
-            </p>
-          </div>
-
-          <div className="flex justify-center space-x-6 mb-6">
+        <div className="text-center">
+          <Image src="/images/forcythelogo.svg" width={100} height={100} alt="Company Logo" className="mx-auto mt-4" />
+          <p className="text-sm mt-2">Your company description here. It can be a short write-up about what your company does and its core values.</p>
+          <div className="flex justify-center space-x-6 mt-4">
             <Link href="https://www.facebook.com" target="_blank" aria-label="Facebook">
               <FaFacebookF className="text-xl hover:text-blue-500" />
             </Link>
@@ -59,10 +51,9 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        {/* Company Links (Grid layout) */}
         <div>
-          <h3 className="font-bold text-xl mb-4 text-center">Company</h3>
-          <div className="grid grid-cols p-6 gap-4">
+          <h3 className="font-bold text-lg md:text-xl mb-4 text-center">Company</h3>
+          <div className="grid grid-cols-1 gap-2 text-center">
             <Link href="/about" className="text-sm">About</Link>
             <Link href="/services" className="text-sm">Services</Link>
             <Link href="/portfolio" className="text-sm">Portfolio</Link>
@@ -73,9 +64,8 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      {/* Bottom Line and Copyright */}
-      <div className="mt-12 border-t border-gray-700 pt-6 text-lg flex justify-between">
-        <p>Copyright &copy; 2024 Your Company. All rights reserved.</p>
+      <div className="mt-12 border-t border-gray-700 pt-6 text-center">
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
       </div>
     </footer>
   );

@@ -85,21 +85,22 @@ const ThirdBodySection: React.FC = () => {
             {notes.map((note, index) => (
               <div
                 key={index}
-                className={`cursor-pointer mb-4 p-4 ${currentIndex === index ? 'text-blue-500' : 'text-gray-500'}`}
+                className={`cursor-pointer mb-4 p-4 text-sm md:text-lg ${
+                  currentIndex === index ? 'text-blue-500' : 'text-gray-500'
+                }`}
                 onClick={() => handleNoteClick(index)}
               >
-                <h3 className="text-4xl font-bold">{note.title}</h3>
+                <h3 className="text-lg md:text-2xl font-bold">{note.title}</h3>
               </div>
             ))}
           </div>
         </div>
-
         <div className="space-y-4">
           {notes.map((note, index) => (
             <div key={index} className="space-y-4">
               {currentIndex === index && (
                 <div className="p-6 rounded-lg shadow-lg">
-                  <h3 className="text-4xl font-bold mb-4">{note.title}</h3>
+                  <h3 className="text-lg md:text-2xl font-bold mb-4">{note.title}</h3>
                   <Image
                     src={note.imageSrc}
                     alt={note.alt}
@@ -107,8 +108,8 @@ const ThirdBodySection: React.FC = () => {
                     height={300}
                     className="rounded-lg mb-4"
                   />
-                  <p className="text-lg text-white mb-4">{displayedContent}</p>
-                  <div className="text-sm text-white">{note.footer}</div>
+                  <p className="text-sm md:text-lg text-white mb-4">{displayedContent}</p>
+                  <div className="text-xs md:text-sm text-white">{note.footer}</div>
                 </div>
               )}
             </div>
@@ -116,6 +117,7 @@ const ThirdBodySection: React.FC = () => {
         </div>
       </div>
     </section>
+
   );
 };
 
