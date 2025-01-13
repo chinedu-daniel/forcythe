@@ -1,100 +1,64 @@
-// src/components/SecondBodySection.tsx
 'use client';
 import Image from 'next/image';
-import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const SecondBodySection: React.FC = () => {
-  // For image sliding effect
-  const [currentIndexRight, setCurrentIndexRight] = useState(0);
-  const [currentIndexLeft, setCurrentIndexLeft] = useState(0);
-
   const images = [
-    '/images/image1.jpeg',
-    '/images/image2.jpeg',
-    '/images/image3.jpeg',
-    '/images/image4.jpeg',
-    '/images/image5.jpeg',
-    '/images/image6.jpeg',
+    '/images/phone.svg',
+    '/images/menu.svg',
+    '/images/activity.svg',
+    '/images/africaFund.svg',
   ];
 
-  // Slider functionality
-  const handleNextRight = () => {
-    setCurrentIndexRight((prevIndex) => (prevIndex + 1) % images.length);
+  // Repeat images to create continuous effect
+  const repeatedImages = [...images, ...images];
+
+  const animationTop = {
+    animate: { x: ['0%', '-100%'] },
+    transition: { repeat: Infinity, duration: 15, ease: 'linear' },
   };
 
-  const handlePrevRight = () => {
-    setCurrentIndexRight((prevIndex) => (prevIndex - 1 + images.length) % images.length);
-  };
-
-  const handleNextLeft = () => {
-    setCurrentIndexLeft((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const handlePrevLeft = () => {
-    setCurrentIndexLeft((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  const animationBottom = {
+    animate: { x: ['0%', '100%'] },
+    transition: { repeat: Infinity, duration: 15, ease: 'linear' },
   };
 
   return (
-    <section className="bg-gray-100 py-12">
-      <div className="container mx-auto px-6 bg-white p-8 rounded-lg shadow-lg">
-        {/* Heading */}
-        <h2 className="text-3xl font-bold mb-6">Explore Our Image Gallery</h2>
+    <section className="py-12">
+      <div className="container mx-auto px-6 p-8 rounded-lg shadow-lg">
+        <h2 className="text-5xl font-bold mb-6">Success in Motion – Our clients’ journey</h2>
+      </div>
 
-        {/* Right Image Slider */}
-        <div className="flex justify-between items-center mb-8">
-          {/* Next Button */}
-          <button
-            className="px-4 py-2 bg-gray-200 hover:bg-gray-400 rounded-full"
-            onClick={handlePrevRight}
-          >
-            &#8592;
-          </button>
+      <div className="overflow-hidden p-10">
+        {/* Top row moving left */}
+        <motion.div className="flex gap-8" {...animationTop}>
+          {repeatedImages.map((image, index) => (
+            <div key={index} className="min-w-[33.33%] flex-shrink-0 p-6">
+              <Image
+                src={image}
+                alt={`Image ${index + 1}`}
+                width={30}
+                height={30}
+                className="w-full h-auto"
+              />
+            </div>
+          ))}
+        </motion.div>
 
-          {/* Image Container */}
-          <div className="flex flex-shrink-0 w-2/3 overflow-hidden relative">
-            <Image width={25} height={25}
-              src={images[currentIndexRight]}
-              alt="Image Slider Right"
-              className="w-full transition-transform duration-500 ease-in-out transform"
-            />
-          </div>
-
-          {/* Prev Button */}
-          <button
-            className="px-4 py-2 bg-gray-200 hover:bg-gray-400 rounded-full"
-            onClick={handleNextRight}
-          >
-            &#8594;
-          </button>
-        </div>
-
-        {/* Left Image Slider */}
-        <div className="flex justify-between items-center">
-          {/* Next Button */}
-          <button
-            className="px-4 py-2 bg-gray-200 hover:bg-gray-400 rounded-full"
-            onClick={handlePrevLeft}
-          >
-            &#8592;
-          </button>
-
-          {/* Image Container */}
-          <div className="flex flex-shrink-0 w-2/3 overflow-hidden relative">
-            <Image width={25} height={25}
-              src={images[currentIndexLeft]}
-              alt="Image Slider Left"
-              className="w-full transition-transform duration-500 ease-in-out transform"
-            />
-          </div>
-
-          {/* Prev Button */}
-          <button
-            className="px-4 py-2 bg-gray-200 hover:bg-gray-400 rounded-full"
-            onClick={handleNextLeft}
-          >
-            &#8594;
-          </button>
-        </div>
+        {/* Bottom row moving right */}
+        <motion.div className="flex gap-8" {...animationBottom}>
+          {repeatedImages.map((image, index) => (
+            <div key={index} className="min-w-[33.33%] flex-shrink-0 p-6">
+              <Image
+                src={image}
+                alt={`Image ${index + 1}`}
+                width={30}
+                height={30}
+                className="w-full h-auto"
+              />
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

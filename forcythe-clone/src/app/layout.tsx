@@ -1,4 +1,6 @@
 import "./globals.css";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 export default function RootLayout({
   children,
@@ -8,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className="bg-black text-white">{children}
+        className="text-white font-mono #ffffff">{children}
       </body>
     </html>
   );

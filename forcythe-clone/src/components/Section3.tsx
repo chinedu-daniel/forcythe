@@ -1,95 +1,114 @@
-// src/components/ThirdBodySection.tsx
 'use client';
-import { useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 interface Note {
   title: string;
   imageSrc: string;
   alt: string;
   content: string;
+  footer: string;
 }
 
 const ThirdBodySection: React.FC = () => {
-  const [expandedNote, setExpandedNote] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [displayedContent, setDisplayedContent] = useState<string>('');
 
   const notes: Note[] = [
     {
-      title: "Note 1",
-      imageSrc: "/images/image6.jpeg",
-      alt: "Note 1 Image",
-      content: "This is a detailed description of Note 1. You can add more information here.",
+      title: "Starks",
+      imageSrc: "/images/executive-pro-ceo.svg",
+      alt: "Starks Associate Image",
+      content: "Partnering with Forcythe was like finding a hidden gem...",
+      footer: "John, Management",
     },
     {
-      title: "Note 2",
-      imageSrc: "/images/image5.jpeg",
-      alt: "Note 2 Image",
-      content: "This is a detailed description of Note 2. You can add more information here.",
+      title: "ExecutivePros",
+      imageSrc: "/images/executive-pro-ceo.svg",
+      alt: "ExecutivePros",
+      content: "The team understood the assignment and delivered very well...",
+      footer: "Testimony, Co-founder",
     },
     {
-      title: "Note 3",
-      imageSrc: "/images/image4.jpeg",
-      alt: "Note 3 Image",
-      content: "This is a detailed description of Note 3. You can add more information here.",
+      title: "stac.ai",
+      imageSrc: "/images/exec-pro.svg",
+      alt: "Stac Ai",
+      content: "Forcythe is seriously amazing when it comes to coming up with new ideas...",
+      footer: "Edwin, Former CTO",
     },
     {
-      title: "Note 4",
-      imageSrc: "/images/image3.jpeg",
-      alt: "Note 4 Image",
-      content: "This is a detailed description of Note 4. You can add more information here.",
+      title: "Iwaria",
+      imageSrc: "/images/iwaria-founder.svg",
+      alt: "Iwaria",
+      content: "The moment we engaged Forcythe, it was clear they were in a league of their own...",
+      footer: "Iwaria Founder",
     },
+    {
+      title: "Beaupreneur",
+      imageSrc: "/images/executive-pro-ceo.svg",
+      alt: "Beaupreneur",
+      content: "The moment we engaged Forcythe, it was clear they were in a league of their own...",
+      footer: "Christiana, Founder",
+    }
   ];
 
-  const handleNoteClick = (index: number) => {
-    if (expandedNote === index) {
-      setExpandedNote(null); // Collapse if already expanded
-    } else {
-      setExpandedNote(index); // Expand clicked note
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+    if (currentIndex >= 0) {
+      setDisplayedContent('');
+      const content = notes[currentIndex].content;
+      let index = 0;
+
+      const revealContent = () => {
+        setDisplayedContent((prev) => prev + content[index]);
+        index++;
+        if (index < content.length) {
+          timeoutId = setTimeout(revealContent, 50);
+        }
+      };
+
+      revealContent();
     }
+
+    return () => clearTimeout(timeoutId);
+  }, [currentIndex, notes]);
+
+  const handleNoteClick = (index: number) => {
+    setCurrentIndex(index);
   };
 
   return (
-    <section className="py-12 bg-gray-100">
-      <div className="container mx-auto px-6 bg-white p-8 rounded-lg shadow-lg">
-        {/* Write-up Section */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold mb-4">Explore Our Featured Notes</h2>
-          <p className="text-lg text-gray-700">
-            Click on any note to explore more details along with its image.
-          </p>
+    <section className="py-12">
+      <div className="container mx-auto px-6 p-8 rounded-lg shadow-lg">
+        <div className="p-4 rounded-lg border-2">
+          <div className="flex space-x-4 overflow-x-auto">
+            {notes.map((note, index) => (
+              <div
+                key={index}
+                className={`cursor-pointer mb-4 p-4 ${currentIndex === index ? 'text-blue-500' : 'text-gray-500'}`}
+                onClick={() => handleNoteClick(index)}
+              >
+                <h3 className="text-4xl font-bold">{note.title}</h3>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Notes Section */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="space-y-4">
           {notes.map((note, index) => (
-            <div
-              key={index}
-              className="bg-white p-6 rounded-lg shadow-lg cursor-pointer"
-              onClick={() => handleNoteClick(index)}
-            >
-              {/* Note Title and Image */}
-              <div className="flex items-center space-x-4">
-                <div className="flex-shrink-0">
+            <div key={index} className="space-y-4">
+              {currentIndex === index && (
+                <div className="p-6 rounded-lg shadow-lg">
+                  <h3 className="text-4xl font-bold mb-4">{note.title}</h3>
                   <Image
                     src={note.imageSrc}
                     alt={note.alt}
-                    width={150}
-                    height={100}
-                    className="rounded-lg"
+                    width={400}
+                    height={300}
+                    className="rounded-lg mb-4"
                   />
-                </div>
-                <div className="flex-grow">
-                  <h3 className="text-xl font-semibold mb-2">{note.title}</h3>
-                  <Link href="#"className="text-blue-500 hover:underline">Click to view details
-                  </Link>
-                </div>
-              </div>
-
-              {/* Expanded Content */}
-              {expandedNote === index && (
-                <div className="mt-4">
-                  <p className="text-gray-700">{note.content}</p>
+                  <p className="text-lg text-white mb-4">{displayedContent}</p>
+                  <div className="text-sm text-white">{note.footer}</div>
                 </div>
               )}
             </div>
